@@ -11,6 +11,7 @@
     <None Remove="Controllers\Models\Response\" />
     <None Remove="Controllers\Models\Request\User\" />
     <None Remove="Controllers\Models\Response\User\" />
+    <None Remove="MySql.Data" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\Models\" />
@@ -26,5 +27,8 @@
     <ProjectReference Include="..\UserRepository\Repository.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.28" />
   </ItemGroup>
 </Project>

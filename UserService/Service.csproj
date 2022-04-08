@@ -12,4 +12,7 @@
     <Folder Include="Interfaces\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UserRepository\Repository.csproj" />
+  </ItemGroup>
 </Project>
