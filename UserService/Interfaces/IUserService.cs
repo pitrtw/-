@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Service.Models;
 
 namespace Service.Interfaces
 {
     public interface IUserService
     {
-        List<UserInfo> GetAllUserInfo();
+        Task<IEnumerable<UserInfo>> GetAllUserInfoAsync();
 
-        UserInfo GetUserInfo(ulong id);
+        Task<UserInfo> GetUserInfoAsync(ulong id);
 
-        bool AddUserInfo(UserInfo userInfo);
+        Task<bool> AddUserInfoAsync(UserInfo userInfo);
 
-        bool UpdateUserInfo(UpdateUserInfo updateUserInfo);
+        Task<bool> UpdateUserInfoAsync(UpdateUserInfo updateUserInfo);
 
-        bool DeleteUserInfo(ulong id);
+        Task<bool> DeleteUserInfoAsync(ulong id);
     }
 }

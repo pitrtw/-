@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Repository.Interface;
 using Service.Interfaces;
 using Service.Models;
 
@@ -6,43 +9,61 @@ namespace Service
 {
     public class UserService: IUserService
     {
-        public UserService()
+        private readonly IUserRespostory _userRespostory = null;
+
+        public UserService(IUserRespostory userRespostory)
         {
+            _userRespostory = userRespostory;
         }
 
-        public bool AddUserInfo(UserInfo userInfo)
+        public async Task<bool> AddUserInfoAsync(UserInfo userInfo)
         {
-            return true;
-        }
-
-        public bool DeleteUserInfo(ulong id)
-        {
-            return true;
-        }
-
-        public List<UserInfo> GetAllUserInfo()
-        {
-            var list = new List<UserInfo> { new UserInfo
-                {
-                    Name = "FakeTest",
-                    Age = 123
-                }
+            var addUserInfo = new Repository.Models.UserInfo
+            {
+                Nickname = userInfo.Nickname,
+                Age = userInfo.Age
             };
 
-            return list;
+            var result = await _userRespostory.AddUserInfoAsync(addUserInfo);
+
+            return result;
         }
 
-        public UserInfo GetUserInfo(ulong id)
+        public async Task<bool> DeleteUserInfoAsync(ulong id)
         {
-            return new UserInfo {
-                Name = "FakeTest",
-                Age = 123
+            var result = await _userRespostory.DeleteUserInfoAsync(id);
+
+            return result;
+        }
+
+        public async Task<IEnumerable<UserInfo>> GetAllUserInfoAsync()
+        {
+            var result = await _userRespostory.GetAllUserInfoAsync();
+
+            var rst = result.Select(x => new UserInfo { Nickname = x.Nickname, Age = x.Age});
+
+            return rst;
+        }
+
+        public async Task<UserInfo> GetUserInfoAsync(ulong id)
+        {
+            var result = await _userRespostory.GetUserInfoAsync(id);
+
+            return new UserInfo { Nickname = result.Nickname, Age = result.Age };
+        }
+
+        public async Task<bool> UpdateUserInfoAsync(UpdateUserInfo updateUserInfo)
+        {
+            var updateUser = new Repository.Models.UpdateUserInfo
+            {
+                Id = updateUserInfo.Id,
+                Nickname = updateUserInfo.Nickname,
+                Age = updateUserInfo.Age
             };
-        }
 
-        public bool UpdateUserInfo(UpdateUserInfo updateUserInfo)
-        {
-            return true;
+            var result = await _userRespostory.UpdateUserInfoAsync(updateUser);
+
+            return result;
         }
     }
 }
