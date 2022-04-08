@@ -1,6 +1,6 @@
-﻿namespace Test.Controllers.Models.Request.User
+﻿namespace Repository.Models
 {
-    public class AddUser
+    public class UserInfo
     {
         public string Nickname { get; set; }
 

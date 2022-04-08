@@ -1,4 +1,4 @@
-﻿namespace Service.Models
+﻿namespace Repository.Models
 {
     public class UpdateUserInfo
     {
