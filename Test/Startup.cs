@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Data;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MySql.Data.MySqlClient;
+using Repository;
+using Repository.Interface;
 using Service;
 using Service.Interfaces;
 
@@ -22,6 +26,9 @@ namespace Test
         {
             services.AddControllers();
 
+            var dbConnectionString = this.Configuration.GetConnectionString("MySql_ConnectionString");
+            services.AddTransient<IDbConnection>((sp) => new MySqlConnection(dbConnectionString));
+            services.AddSingleton<IUserRespostory, UserRespostory>();
             services.AddSingleton<IUserService, UserService>();
         }
 
