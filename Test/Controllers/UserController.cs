@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
 using Service.Models;
 using Test.Controllers.Models.Request.User;
@@ -19,57 +20,57 @@ namespace Test.Controllers
 
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var result = _userService.GetAllUserInfo();
+            var result = await _userService.GetAllUserInfoAsync();
 
             return Ok(result);
         }
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult Get([FromRoute] ulong id)
+        public async Task<IActionResult> Get([FromRoute] ulong id)
         {
-            var result = _userService.GetUserInfo(id);
+            var result = await _userService.GetUserInfoAsync(id);
 
             return Ok(result);
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] AddUser req)
+        public async Task<IActionResult> AddAsync([FromBody] AddUser req)
         {
             var userInfo = new UserInfo
             {
-                Name = req.Name,
+                Nickname = req.Nickname,
                 Age = req.Age
             };
 
-            var result = _userService.AddUserInfo(userInfo);
+            var result = await _userService.AddUserInfoAsync(userInfo);
 
             return Ok(result);
         }
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult Update( [FromRoute] ulong id, [FromBody] UpdateUser req)
+        public async Task<IActionResult> Update( [FromRoute] ulong id, [FromBody] UpdateUser req)
         {
             var updateUserInfo = new UpdateUserInfo
             {
                 Id = id,
-                Name = req.Name,
+                Nickname = req.Nickname,
                 Age = req.Age
             };
 
-            var result = _userService.UpdateUserInfo(updateUserInfo);
+            var result = await _userService.UpdateUserInfoAsync(updateUserInfo);
 
             return Ok(result);
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult Delete([FromRoute] ulong id)
+        public async Task<IActionResult> Delete([FromRoute] ulong id)
         {
-            var result = _userService.DeleteUserInfo(id);
+            var result = await _userService.DeleteUserInfoAsync(id);
 
             return Ok(result);
         }
