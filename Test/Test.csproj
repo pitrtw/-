@@ -19,4 +19,12 @@
     <Folder Include="Controllers\Models\Request\User\" />
     <Folder Include="Controllers\Models\Response\User\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UserService\Service.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\UserRepository\Repository.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

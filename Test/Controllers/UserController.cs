@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Service.Interfaces;
+using Service.Models;
 using Test.Controllers.Models.Request.User;
 
 namespace Test.Controllers
@@ -7,40 +9,69 @@ namespace Test.Controllers
     [Route("[controller]")]
     public class UserController : Controller
     {
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+
+        }
+
+
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("all");
+            var result = _userService.GetAllUserInfo();
+
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("{id}")]
         public IActionResult Get([FromRoute] ulong id)
         {
-            return Ok(id);
+            var result = _userService.GetUserInfo(id);
+
+            return Ok(result);
         }
 
         [HttpPost]
         public IActionResult Add([FromBody] AddUser req)
         {
-            return Ok(req);
+            var userInfo = new UserInfo
+            {
+                Name = req.Name,
+                Age = req.Age
+            };
+
+            var result = _userService.AddUserInfo(userInfo);
+
+            return Ok(result);
         }
 
         [HttpPut]
         [Route("{id}")]
         public IActionResult Update( [FromRoute] ulong id, [FromBody] UpdateUser req)
         {
-            return Ok(new {
-                id,
-                req
-            });
+            var updateUserInfo = new UpdateUserInfo
+            {
+                Id = id,
+                Name = req.Name,
+                Age = req.Age
+            };
+
+            var result = _userService.UpdateUserInfo(updateUserInfo);
+
+            return Ok(result);
         }
 
         [HttpDelete]
         [Route("{id}")]
         public IActionResult Delete([FromRoute] ulong id)
         {
-            return Ok(id);
+            var result = _userService.DeleteUserInfo(id);
+
+            return Ok(result);
         }
     }
 }
