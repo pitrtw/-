@@ -1,6 +1,6 @@
-﻿namespace Repository.Models
+﻿namespace Common.Models
 {
-    public class UpdateUserInfo
+    public class UserInfo
     {
         public ulong Id { get; set; }
 

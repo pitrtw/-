@@ -26,9 +26,11 @@ namespace Test
         {
             services.AddControllers();
 
+            // 讀取資料庫連線字串
             var dbConnectionString = this.Configuration.GetConnectionString("MySql_ConnectionString");
+            // 註冊服務
             services.AddTransient<IDbConnection>((sp) => new MySqlConnection(dbConnectionString));
-            services.AddSingleton<IUserRespostory, UserRespostory>();
+            services.AddTransient<IUserRespostory, UserRespostory>();
             services.AddSingleton<IUserService, UserService>();
         }
 

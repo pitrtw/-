@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using Repository.Interface;
-using Repository.Models;
-using Dapper;
 using System.Threading.Tasks;
+using Common.Models;
+using Dapper;
+using Repository.Interface;
 
 namespace Repository
 {
@@ -28,15 +28,11 @@ namespace Repository
                     nickname = userInfo.Nickname,
                     age = userInfo.Age
                 };
-                var queryResult = await db.ExecuteScalarAsync<int>(script, param);
+                var affectedRows = await db.ExecuteAsync(script, param);
 
-                var result = false;
-                if (queryResult == 0)
-                {
-                    result = true;
-                }
+                var isSuccess = (affectedRows > 0);
 
-                return result;
+                return isSuccess;
             }
             catch (System.Exception ex)
             {
@@ -54,15 +50,11 @@ namespace Repository
                 {
                     id = id,
                 };
-                var queryResult = await db.ExecuteScalarAsync<int>(script, param);
+                var affectedRows = await db.ExecuteAsync(script, param);
 
-                var result = false;
-                if (queryResult == 0)
-                {
-                    result = true;
-                }
+                var isSuccess = (affectedRows > 0);
 
-                return result;
+                return isSuccess;
             }
             catch (System.Exception ex)
             {
@@ -96,7 +88,7 @@ namespace Repository
                 {
                     id = id,
                 };
-                var queryResult = await db.QueryFirstAsync<UserInfo>(script, param);
+                var queryResult = await db.QueryFirstOrDefaultAsync<UserInfo>(script, param);
 
                 return queryResult;
             }
@@ -118,15 +110,11 @@ namespace Repository
                     nickname = updateUserInfo.Nickname,
                     age = updateUserInfo.Age
                 };
-                var queryResult = await db.ExecuteScalarAsync<int>(script, param);
+                var affectedRows = await db.ExecuteAsync(script, param);
 
-                var result = false;
-                if (queryResult == 0)
-                {
-                    result = true;
-                }
+                var isSuccess = (affectedRows > 0);
 
-                return result;
+                return isSuccess;
             }
             catch (System.Exception ex)
             {
