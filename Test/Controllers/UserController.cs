@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
 using Service.Models;
@@ -23,6 +24,10 @@ namespace Test.Controllers
         public async Task<IActionResult> Get()
         {
             var result = await _userService.GetAllUserInfoAsync();
+            if (result == null || !result.Any())
+            {
+                return NotFound("無任何資料");
+            }
 
             return Ok(result);
         }
@@ -33,6 +38,10 @@ namespace Test.Controllers
         public async Task<IActionResult> Get([FromRoute] ulong id)
         {
             var result = await _userService.GetUserInfoAsync(id);
+            if (result == null)
+            {
+                return NotFound("查無該使用者資料");
+            }
 
             return Ok(result);
         }

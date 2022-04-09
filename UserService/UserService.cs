@@ -48,6 +48,10 @@ namespace Service
         public async Task<UserInfo> GetUserInfoAsync(ulong id)
         {
             var result = await _userRespostory.GetUserInfoAsync(id);
+            if (result == null)
+            {
+                return null;
+            }
 
             return new UserInfo { Nickname = result.Nickname, Age = result.Age };
         }
