@@ -18,7 +18,7 @@ namespace Test.Controllers
 
         }
 
-
+        // 取得全部使用者
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -27,6 +27,7 @@ namespace Test.Controllers
             return Ok(result);
         }
 
+        // 取得指定使用者
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> Get([FromRoute] ulong id)
@@ -36,6 +37,7 @@ namespace Test.Controllers
             return Ok(result);
         }
 
+        // 新增使用者
         [HttpPost]
         public async Task<IActionResult> AddAsync([FromBody] AddUser req)
         {
@@ -50,6 +52,7 @@ namespace Test.Controllers
             return Ok(result);
         }
 
+        // 更新指定使用者
         [HttpPut]
         [Route("{id}")]
         public async Task<IActionResult> Update( [FromRoute] ulong id, [FromBody] UpdateUser req)
@@ -66,6 +69,7 @@ namespace Test.Controllers
             return Ok(result);
         }
 
+        // 刪除指定使用者
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] ulong id)
