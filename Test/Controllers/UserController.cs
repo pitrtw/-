@@ -21,7 +21,7 @@ namespace Test.Controllers
 
         // 取得全部使用者
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAsync()
         {
             var result = await _userService.GetAllUserInfoAsync();
             if (result == null || !result.Any())
@@ -35,7 +35,7 @@ namespace Test.Controllers
         // 取得指定使用者
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> Get([FromRoute] ulong id)
+        public async Task<IActionResult> GetAsync([FromRoute] ulong id)
         {
             var result = await _userService.GetUserInfoAsync(id);
             if (result == null)
@@ -56,15 +56,15 @@ namespace Test.Controllers
                 Age = req.Age
             };
 
-            var result = await _userService.AddUserInfoAsync(userInfo);
+            var isSuccess = await _userService.AddUserInfoAsync(userInfo);
 
-            return Ok(result);
+            return Ok(isSuccess);
         }
 
         // 更新指定使用者
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Update( [FromRoute] ulong id, [FromBody] UpdateUser req)
+        public async Task<IActionResult> UpdateAsync([FromRoute] ulong id, [FromBody] UpdateUser req)
         {
             var updateUserInfo = new UpdateUserInfo
             {
@@ -73,19 +73,19 @@ namespace Test.Controllers
                 Age = req.Age
             };
 
-            var result = await _userService.UpdateUserInfoAsync(updateUserInfo);
+            var isSuccess = await _userService.UpdateUserInfoAsync(updateUserInfo);
 
-            return Ok(result);
+            return Ok(isSuccess);
         }
 
         // 刪除指定使用者
         [HttpDelete]
         [Route("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] ulong id)
+        public async Task<IActionResult> DeleteAsync([FromRoute] ulong id)
         {
-            var result = await _userService.DeleteUserInfoAsync(id);
+            var isSuccess = await _userService.DeleteUserInfoAsync(id);
 
-            return Ok(result);
+            return Ok(isSuccess);
         }
     }
 }
