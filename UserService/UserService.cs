@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Repository.Interface;
 using Service.Interfaces;
-using Service.Models;
+using Common.Models;
 
 namespace Service
 {
@@ -18,13 +18,7 @@ namespace Service
 
         public async Task<bool> AddUserInfoAsync(UserInfo userInfo)
         {
-            var addUserInfo = new Repository.Models.UserInfo
-            {
-                Nickname = userInfo.Nickname,
-                Age = userInfo.Age
-            };
-
-            var result = await _userRespostory.AddUserInfoAsync(addUserInfo);
+            var result = await _userRespostory.AddUserInfoAsync(userInfo);
 
             return result;
         }
@@ -40,28 +34,23 @@ namespace Service
         {
             var result = await _userRespostory.GetAllUserInfoAsync();
 
-            var rst = result.Select(x => new UserInfo { Nickname = x.Nickname, Age = x.Age});
-
-            return rst;
+            return result;
         }
 
         public async Task<UserInfo> GetUserInfoAsync(ulong id)
         {
             var result = await _userRespostory.GetUserInfoAsync(id);
+            if (result == null)
+            {
+                return null;
+            }
 
-            return new UserInfo { Nickname = result.Nickname, Age = result.Age };
+            return new UserInfo { Id = result.Id, Nickname = result.Nickname, Age = result.Age };
         }
 
         public async Task<bool> UpdateUserInfoAsync(UpdateUserInfo updateUserInfo)
         {
-            var updateUser = new Repository.Models.UpdateUserInfo
-            {
-                Id = updateUserInfo.Id,
-                Nickname = updateUserInfo.Nickname,
-                Age = updateUserInfo.Age
-            };
-
-            var result = await _userRespostory.UpdateUserInfoAsync(updateUser);
+            var result = await _userRespostory.UpdateUserInfoAsync(updateUserInfo);
 
             return result;
         }

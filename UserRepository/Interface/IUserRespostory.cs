@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Repository.Models;
+using Common.Models;
 
 namespace Repository.Interface
 {
