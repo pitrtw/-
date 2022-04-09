@@ -8,17 +8,13 @@
   <ItemGroup>
     <None Remove="Controllers\Models\" />
     <None Remove="Controllers\Models\Request\" />
-    <None Remove="Controllers\Models\Response\" />
     <None Remove="Controllers\Models\Request\User\" />
-    <None Remove="Controllers\Models\Response\User\" />
     <None Remove="MySql.Data" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\Models\" />
     <Folder Include="Controllers\Models\Request\" />
-    <Folder Include="Controllers\Models\Response\" />
     <Folder Include="Controllers\Models\Request\User\" />
-    <Folder Include="Controllers\Models\Response\User\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UserService\Service.csproj">
