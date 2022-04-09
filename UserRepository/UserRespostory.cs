@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using Repository.Interface;
-using Repository.Models;
-using Dapper;
 using System.Threading.Tasks;
+using Common.Models;
+using Dapper;
+using Repository.Interface;
 
 namespace Repository
 {

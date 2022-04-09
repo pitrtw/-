@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
-using Service.Models;
+using Common.Models;
 using Test.Controllers.Models.Request.User;
 
 namespace Test.Controllers
