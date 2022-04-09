@@ -40,7 +40,7 @@ namespace Service
         {
             var result = await _userRespostory.GetAllUserInfoAsync();
 
-            var rst = result.Select(x => new UserInfo { Nickname = x.Nickname, Age = x.Age});
+            var rst = result.Select(x => new UserInfo { Id = x.Id, Nickname = x.Nickname, Age = x.Age});
 
             return rst;
         }
@@ -53,7 +53,7 @@ namespace Service
                 return null;
             }
 
-            return new UserInfo { Nickname = result.Nickname, Age = result.Age };
+            return new UserInfo { Id = result.Id, Nickname = result.Nickname, Age = result.Age };
         }
 
         public async Task<bool> UpdateUserInfoAsync(UpdateUserInfo updateUserInfo)
