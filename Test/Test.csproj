@@ -17,10 +17,13 @@
     <Folder Include="Controllers\Models\Request\User\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UserService\Service.csproj">
+    <ProjectReference Include="..\Models\Common.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="..\UserRepository\Repository.csproj">
+    <ProjectReference Include="..\Service\Service.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
