@@ -24,9 +24,11 @@ namespace Test.Controllers
         public async Task<IActionResult> GetAsync()
         {
             var result = await _userService.GetAllUserInfoAsync();
-            if (result == null || !result.Any())
+
+            if (!result.Any())
             {
-                return NotFound("無任何資料");
+                // 無資料
+                return NoContent();
             }
 
             return Ok(result);
@@ -40,7 +42,8 @@ namespace Test.Controllers
             var result = await _userService.GetUserInfoAsync(id);
             if (result == null)
             {
-                return NotFound("查無該使用者資料");
+                // 無資料
+                return NoContent();
             }
 
             return Ok(result);
