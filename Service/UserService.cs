@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Common.Models;
 using Repository.Interface;
 using Service.Interfaces;
-using Common.Models;
 
 namespace Service
 {
@@ -40,12 +39,8 @@ namespace Service
         public async Task<UserInfo> GetUserInfoAsync(ulong id)
         {
             var result = await _userRespostory.GetUserInfoAsync(id);
-            if (result == null)
-            {
-                return null;
-            }
 
-            return new UserInfo { Id = result.Id, Nickname = result.Nickname, Age = result.Age };
+            return result ?? null;
         }
 
         public async Task<bool> UpdateUserInfoAsync(UpdateUserInfo updateUserInfo)
